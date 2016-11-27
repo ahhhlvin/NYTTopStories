@@ -50,9 +50,7 @@ static int maxNumItemsPerSection =10;
 -(void)fetchData {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-        
+    [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {        
         NSArray *dataArray = [responseObject objectForKey:@"results"];
         
         for (int i = 0; i < dataArray.count; i++) {
@@ -131,10 +129,6 @@ static int maxNumItemsPerSection =10;
             [cell.imageView setImage:NULL];
         }
     }
-    
-    // For testing
-//    cell.textLabel.text = @"HELLO";
-    
     return cell;
 }
 
@@ -153,14 +147,6 @@ static int maxNumItemsPerSection =10;
     
     if (offsetY > contentHeight - scrollView.frame.size.height) {
         [self.topStoriesArray addObjectsFromArray:self.topStoriesArray];
-        
-        // For testing
-//        maxNumItemsPerSection += 8;
-//        for (int i = 0; i < 8; i++) {
-//            TopStory *story = [[TopStory alloc] init];
-//            [self.topStoriesArray addObject:story];
-//        }
-        
         [self.resultsTableView reloadData];
     }
 }
